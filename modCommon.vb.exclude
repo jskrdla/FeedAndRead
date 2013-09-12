@@ -1,0 +1,153 @@
+﻿Imports System.Net
+Imports System.Data
+
+Module modCommon
+
+    Public Structure FeedItem
+        Dim Source As String
+        Dim URL As String
+        Dim Title As String
+        Dim Summary As String
+        Dim PublishedDate As Date
+        Dim Processed As Boolean
+    End Structure
+
+    Public Function GetRSSTable() As DataTable
+        If Not System.IO.File.Exists(RSSList) Then
+            Dim dt As New DataTable("RssTable")
+            dt.Columns.Add("Name")
+            dt.Columns.Add("URL")
+            dt.Rows.Add(dt.NewRow)
+            Dim MyRSS As DataSet = New DataSet()
+            MyRSS.Tables.Add(dt)
+            MyRSS.WriteXml(RSSList)
+            Return dt
+        End If
+
+        Dim myDS As DataSet = New DataSet
+        myDS.ReadXml(RSSList, XmlReadMode.Auto)
+
+        If myDS.Tables.Count = 0 Then
+            Return New DataTable()
+        Else
+            Return myDS.Tables(0)
+        End If
+    End Function
+
+    Public Function GetSavePath(ByVal URL As String)
+        Dim sPath As String = Folder
+        If Not sPath.EndsWith("\") Then sPath = sPath & "\"
+        If Not System.IO.Directory.Exists(sPath) Then System.IO.Directory.CreateDirectory(sPath)
+
+        Dim Name As String = URL.Substring(URL.LastIndexOf("/") + 1)
+        If Not Name.EndsWith(".gif") AndAlso Not Name.EndsWith(".jpg") Then Name = Name + ".gif"
+        Dim WorkingName As String = Name
+        Dim index As Integer = 0
+        While System.IO.File.Exists(sPath + WorkingName)
+            index += 1
+            WorkingName = Name.Substring(0, Name.LastIndexOf(".")) + "(" + index.ToString() + ")" + Name.Substring(Name.LastIndexOf("."))
+        End While
+        Return sPath + WorkingName
+    End Function
+
+    Public Function DownloadImage(ByVal URL As String) As Boolean
+        Try
+            Dim client As WebClient = New WebClient
+            'GetSavePath(URL)
+            client.DownloadFile(URL, GetSavePath(URL))
+        Catch ex As Exception
+            Return False
+        End Try
+
+        Return True
+    End Function
+
+    Public Function LoadDataTable() As DataTable
+        DocExists()
+
+        Dim myDS As DataSet = New DataSet
+        myDS.ReadXml(Document, XmlReadMode.Auto)
+
+        If myDS.Tables.Count > 0 Then
+            Return myDS.Tables(0)
+        Else
+            Return GetEmptyTable()
+        End If
+
+    End Function
+
+    Public Sub DocExists()
+        If (Not System.IO.File.Exists(Document)) Then
+            SaveDataTable(GetEmptyTable)
+        End If
+    End Sub
+
+    Public Sub SaveDataTable(ByVal dt As DataTable)
+        Dim ds As New DataSet
+        ds.Tables.Add(dt.Copy)
+        ds.WriteXml(Document)
+    End Sub
+
+    Public Function GetEmptyTable() As DataTable
+        Dim dt As New DataTable
+        dt.Columns.Add(New DataColumn("Source"))
+        dt.Columns.Add(New DataColumn("Title"))
+        dt.Columns.Add(New DataColumn("Summary"))
+        dt.Columns.Add(New DataColumn("Content"))
+        dt.Columns.Add(New DataColumn("URL"))
+        dt.Columns.Add(New DataColumn("Date", System.Type.GetType("System.DateTime")))
+        dt.Columns.Add(New DataColumn("Processed", System.Type.GetType("System.Boolean")))
+        Return dt
+    End Function
+
+    Public ReadOnly Property RSSFeed As String
+        Get
+            Dim rootWebConfig1 As System.Configuration.Configuration
+            rootWebConfig1 = System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration(Nothing)
+            If (rootWebConfig1.AppSettings.Settings.Count > 0) Then
+                Dim customSetting As System.Configuration.KeyValueConfigurationElement
+                customSetting = rootWebConfig1.AppSettings.Settings("RSSFeed")
+                Return customSetting.Value
+            End If
+            Return ""
+        End Get
+    End Property
+
+    Public ReadOnly Property Folder As String
+        Get
+            Dim rootWebConfig1 As System.Configuration.Configuration
+            rootWebConfig1 = System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration(Nothing)
+            If (rootWebConfig1.AppSettings.Settings.Count > 0) Then
+                Dim customSetting As System.Configuration.KeyValueConfigurationElement
+                customSetting = rootWebConfig1.AppSettings.Settings("Folder")
+                Return customSetting.Value
+            End If
+            Return ""
+        End Get
+    End Property
+
+    Public ReadOnly Property Document As String
+        Get
+            Dim rootWebConfig1 As System.Configuration.Configuration
+            rootWebConfig1 = System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration(Nothing)
+            If (rootWebConfig1.AppSettings.Settings.Count > 0) Then
+                Dim customSetting As System.Configuration.KeyValueConfigurationElement
+                customSetting = rootWebConfig1.AppSettings.Settings("Document")
+                Return customSetting.Value
+            End If
+            Return ""
+        End Get
+    End Property
+
+    Public Function GetFolder() As String
+        Return Folder
+    End Function
+
+    Public Function GetDocument() As String
+        Return Document
+    End Function
+
+    Public Function GetRSSFeed() As String
+        Return RSSFeed
+    End Function
+End Module

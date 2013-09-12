@@ -1,0 +1,87 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <RssTable>
+    <Name>Adam At Home</Name>
+    <URL>http://feeds.feedburner.com/uclick/adamathome</URL>
+  </RssTable>
+  <RssTable>
+    <Name>Argyle Sweater</Name>
+    <URL>http://feeds.feedburner.com/uclick/theargylesweater</URL>
+  </RssTable>
+  <RssTable>
+    <Name>Baby Blues</Name>
+    <URL>http://www.arcamax.com/thefunnies/babyblues/rss</URL>
+  </RssTable>
+  <RssTable>
+    <Name>Close to Home</Name>
+    <URL>http://feeds.feedburner.com/uclick/closetohome</URL>
+  </RssTable>
+  <RssTable>
+    <Name>Frank and Ernest</Name>
+    <URL>http://feeds.feedburner.com/uclick/frankandernest</URL>
+  </RssTable>
+  <RssTable>
+    <Name>In the Bleachers</Name>
+    <URL>http://feeds.feedburner.com/uclick/inthebleachers</URL>
+  </RssTable>
+  <RssTable>
+    <Name>Pluggers</Name>
+    <URL>http://feeds.feedburner.com/uclick/pluggers</URL>
+  </RssTable>
+  <RssTable>
+    <Name>Real Life Adventures</Name>
+    <URL>http://feeds.feedburner.com/uclick/reallifeadventures</URL>
+  </RssTable>
+  <RssTable>
+    <Name>Ziggy</Name>
+    <URL>http://feeds.feedburner.com/uclick/ziggy</URL>
+  </RssTable>
+  <RssTable>
+    <Name>Zits</Name>
+    <URL>http://www.arcamax.com/cgi-bin/news/page/1057/channelfeed</URL>
+  </RssTable>
+  <RssTable>
+    <Name>Family Circus</Name>
+    <URL>http://www.arcamax.com/cgi-bin/news/page/1083/channelfeed</URL>
+  </RssTable>
+  <RssTable>
+    <Name>BC</Name>
+    <URL>http://www.arcamax.com/cgi-bin/news/page/1084/channelfeed</URL>
+  </RssTable>
+  <RssTable>
+    <Name>Mother Goose and Grimm</Name>
+    <URL>http://www.arcamax.com/cgi-bin/news/page/1255/channelfeed</URL>
+  </RssTable>
+  <RssTable>
+    <Name>Rubes</Name>
+    <URL>http://www.arcamax.com/cgi-bin/news/page/1278/channelfeed</URL>
+  </RssTable>
+  <RssTable>
+    <Name>Dilbert</Name>
+    <URL>http://www.arcamax.com/cgi-bin/news/page/1309/channelfeed</URL>
+  </RssTable>
+  <RssTable>
+    <Name>Daddys Home</Name>
+    <URL>http://www.arcamax.com/daddyshome/channelfeed</URL>
+  </RssTable>
+  <RssTable>
+    <Name>Humor Cartoon</Name>
+    <URL>http://www.arcamax.com/humorcartoon/channelfeed</URL>
+  </RssTable>
+  <RssTable>
+    <Name>Luann</Name>
+    <URL>http://www.arcamax.com/luann/channelfeed</URL>
+  </RssTable>
+  <RssTable>
+    <Name>Non Sequitur</Name>
+    <URL>http://www.arcamax.com/nonsequitur/channelfeed</URL>
+  </RssTable>
+  <RssTable>
+    <Name>Pearls Before the Swine</Name>
+    <URL>http://www.arcamax.com/pearlsbeforeswine/channelfeed</URL>
+  </RssTable>
+  <RssTable>
+    <Name>Speed Bump</Name>
+    <URL>http://www.arcamax.com/speedbump/channelfeed</URL>
+  </RssTable>
+</NewDataSet>
